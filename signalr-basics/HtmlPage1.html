@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <span id="serverTime" />
+
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script src="Scripts/jquery.signalR-2.2.2.js"></script>
+    <script src="/SignalR/hubs"></script>
+
+    <script>
+
+        $.connection.hub.start().done(function () {
+            $.connection.myHub.server.broadCastServerTime();
+        });
+
+        $.connection.myHub.client.MessageReceiver = function (message) {
+
+            $("#serverTime").text(message);
+        }
+
+    </script>
+
+</body>
+</html>
